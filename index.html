@@ -7,6 +7,23 @@
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Hidden forms for Netlify detection -->
+    <form name="contact" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <form name="checkout" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="surname" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="address"></textarea>
+      <input type="text" name="plan" />
+    </form>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
