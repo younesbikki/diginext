@@ -281,7 +281,7 @@ const Pricing = ({ onOpenCheckout }: { onOpenCheckout: () => void }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-16">
                 <ul className="space-y-5">
-                  {['All Pro features included', '1TB Cloud storage', 'Lifetime updates', 'Official account access'].map((item, i) => (
+                  {['All Pro features included', 'Lifetime updates', 'Official account access'].map((item, i) => (
                     <li key={i} className="flex items-center gap-4 text-slate-300">
                       <div className="w-6 h-6 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0 border border-indigo-500/20">
                         <Check className="w-3.5 h-3.5 text-indigo-400" />
