@@ -58,6 +58,22 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
     setStatus('submitting');
     
     try {
+      // Netlify Form Submission
+      const netlifyData = new URLSearchParams();
+      netlifyData.append('form-name', 'checkout');
+      netlifyData.append('name', formData.name);
+      netlifyData.append('surname', formData.surname);
+      netlifyData.append('email', formData.email);
+      netlifyData.append('phone', formData.phone);
+      netlifyData.append('address', formData.address);
+      netlifyData.append('plan', 'Canva Pro Lifetime');
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: netlifyData.toString()
+      });
+
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -120,7 +136,15 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                   <p className="text-slate-400">Please provide your details to get lifetime access.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form 
+                  onSubmit={handleSubmit} 
+                  className="space-y-5"
+                  name="checkout"
+                  data-netlify="true"
+                >
+                  <input type="hidden" name="form-name" value="checkout" />
+                  <input type="hidden" name="plan" value="Canva Pro Lifetime" />
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-1.5">
                       <label className="text-sm font-semibold text-slate-300 flex items-center gap-2">
@@ -129,6 +153,7 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                       <input 
                         required
                         type="text"
+                        name="name"
                         value={formData.name}
                         onChange={e => setFormData({...formData, name: e.target.value})}
                         placeholder="First Name"
@@ -142,6 +167,7 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                       <input 
                         required
                         type="text"
+                        name="surname"
                         value={formData.surname}
                         onChange={e => setFormData({...formData, surname: e.target.value})}
                         placeholder="Last Name"
@@ -157,6 +183,7 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                     <input 
                       required
                       type="email"
+                      name="email"
                       value={formData.email}
                       onChange={e => setFormData({...formData, email: e.target.value})}
                       placeholder="email@example.com"
@@ -171,6 +198,7 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                     <input 
                       required
                       type="tel"
+                      name="phone"
                       value={formData.phone}
                       onChange={e => setFormData({...formData, phone: e.target.value})}
                       placeholder="+1 (555) 000-0000"
@@ -185,6 +213,7 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                     <textarea 
                       required
                       rows={2}
+                      name="address"
                       value={formData.address}
                       onChange={e => setFormData({...formData, address: e.target.value})}
                       placeholder="Your full address"
@@ -411,6 +440,19 @@ const ContactForm = () => {
     setStatus('submitting');
     
     try {
+      // Netlify Form Submission
+      const netlifyData = new URLSearchParams();
+      netlifyData.append('form-name', 'contact');
+      netlifyData.append('name', formData.name);
+      netlifyData.append('email', formData.email);
+      netlifyData.append('message', formData.message);
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: netlifyData.toString()
+      });
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -442,13 +484,21 @@ const ContactForm = () => {
   }
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit}>
+    <form 
+      className="space-y-6" 
+      onSubmit={handleSubmit}
+      name="contact"
+      data-netlify="true"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-semibold text-slate-300 ml-1">Name</label>
           <input 
             required
             type="text" 
+            name="name"
             value={formData.name}
             onChange={e => setFormData({...formData, name: e.target.value})}
             placeholder="John Doe"
@@ -460,6 +510,7 @@ const ContactForm = () => {
           <input 
             required
             type="email" 
+            name="email"
             value={formData.email}
             onChange={e => setFormData({...formData, email: e.target.value})}
             placeholder="john@example.com"
@@ -472,6 +523,7 @@ const ContactForm = () => {
         <textarea 
           required
           rows={4}
+          name="message"
           value={formData.message}
           onChange={e => setFormData({...formData, message: e.target.value})}
           placeholder="How can we help you?"
