@@ -82,11 +82,7 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
       
       if (response.ok) {
         setStatus('success');
-        setTimeout(() => {
-          onClose();
-          setStatus('idle');
-          setFormData({ name: '', surname: '', address: '', phone: '', email: '' });
-        }, 3000);
+        window.location.href = '/success.html';
       } else {
         setStatus('error');
       }
@@ -140,6 +136,8 @@ const CheckoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                   onSubmit={handleSubmit} 
                   className="space-y-5"
                   name="checkout"
+                  method="POST"
+                  action="/success.html"
                   data-netlify="true"
                 >
                   <input type="hidden" name="form-name" value="checkout" />
@@ -461,8 +459,7 @@ const ContactForm = () => {
       
       if (response.ok) {
         setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus('idle'), 5000);
+        window.location.href = '/success.html';
       } else {
         setStatus('error');
       }
@@ -488,6 +485,8 @@ const ContactForm = () => {
       className="space-y-6" 
       onSubmit={handleSubmit}
       name="contact"
+      method="POST"
+      action="/success.html"
       data-netlify="true"
     >
       <input type="hidden" name="form-name" value="contact" />
