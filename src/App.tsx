@@ -29,6 +29,7 @@ const Navbar = ({ onOpenCheckout }: { onOpenCheckout: () => void }) => (
         <span className="font-display font-bold text-xl tracking-tight premium-text-gradient">Diginext-Store</span>
       </div>
       <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-400">
+        <a href="#" className="hover:text-indigo-400 transition-colors">Home</a>
         <a href="#pricing" className="hover:text-indigo-400 transition-colors">Pricing</a>
         <a href="#faq" className="hover:text-indigo-400 transition-colors">FAQ</a>
         <a href="#contact" className="hover:text-indigo-400 transition-colors">Contact</a>
